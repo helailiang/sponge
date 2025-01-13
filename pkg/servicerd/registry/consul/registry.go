@@ -51,7 +51,7 @@ func NewRegistry(consulAddr string, id string, instanceName string, instanceEndp
 		return nil, nil, err
 	}
 
-	return New(cli, WithHealthCheck(true)), serviceInstance, nil
+	return New(cli, WithHealthCheck(false)), serviceInstance, nil
 }
 
 // New create a consul registry
