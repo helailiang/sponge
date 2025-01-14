@@ -4,6 +4,7 @@ package consul
 import (
 	"context"
 	"fmt"
+	"log"
 	"sync"
 	"sync/atomic"
 	"time"
@@ -69,12 +70,14 @@ func New(apiClient *api.Client, opts ...Option) *Registry {
 
 // Register register service
 func (r *Registry) Register(ctx context.Context, svc *registry.ServiceInstance) error {
+	log.Println("Registering service: ", svc.Name, svc.ID)
 	return r.cli.Register(ctx, svc, r.enableHealthCheck)
 }
 
 // Deregister deregister service
 func (r *Registry) Deregister(ctx context.Context, svc *registry.ServiceInstance) error {
 	// NOTE: invoke the func Deregister will block when err is not nil
+	log.Println("Deregister service: ", svc.ID)
 	return r.cli.Deregister(ctx, svc.ID)
 }
 
